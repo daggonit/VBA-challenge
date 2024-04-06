@@ -1,0 +1,50 @@
+Sub StockData()
+    Dim ticker As String
+    Dim ticker_row As Integer
+    ticker_row = 2
+    Dim yearly_change As Integer
+    yearly_change = 0
+    Dim percent_change As Integer
+    percent_change = 0
+    Dim TSV As Double
+    TSV = 0
+    
+    For i = 2 To 753001
+        
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+            
+            ticker = Cells(i, 1).Value
+            
+            TSV = TSV + Cells(i, 7).Value
+            
+            yearly_change = Cells(i, 6).Value - Cells(i, 3).Value
+            
+            percent_change = Cells(i, 3).Value \ Cells(i, 6).Value
+            
+            Range("J" & ticker_row).Value = ticker
+            
+            Range("M" & ticker_row).Value = TSV
+            
+            Range("L" & ticker_row).Value = percent_change
+            
+            Range("K" & ticker_row).Value = yearly_change
+            
+            ticker_row = ticker_row + 1
+            
+            TSV = 0
+            
+            percent_change = 0
+            
+            yearly_change = 0
+            
+        Else
+            
+            TSV = TSV + Cells(i, 7).Value
+            
+        End If
+        
+    Next i
+    
+    
+    
+End Sub
